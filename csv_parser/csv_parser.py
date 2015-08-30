@@ -5,8 +5,7 @@ import csv
 from collections import OrderedDict
 
 
-def passed_tests(file_name):
-    """passed_tests_count, failed_tests_count, created_at"""
+def test_counter(file_name, passed=True):
     lst = _parser(file_name)
     test_dct = {}
     date_list = _list_maker(file_name)
@@ -14,21 +13,10 @@ def passed_tests(file_name):
         s = 0
         for sec_item in lst:
             if item == sec_item.get('created_at')[:10]:
-                s += int(sec_item.get('passed_tests_count'))
-                test_dct[sec_item.get('created_at')[:10]] = s
-    return test_dct
-
-
-def failed_tests(file_name):
-    """passed_tests_count, failed_tests_count, created_at"""
-    lst = _parser(file_name)
-    test_dct = {}
-    date_list = _list_maker(file_name)
-    for item in date_list:
-        s = 0
-        for sec_item in lst:
-            if item == sec_item.get('created_at')[:10]:
-                s += int(sec_item.get('failed_tests_count'))
+                if passed:
+                    s += int(sec_item.get('passed_tests_count'))
+                else:
+                    s += int(sec_item.get('failed_tests_count'))
                 test_dct[sec_item.get('created_at')[:10]] = s
     return test_dct
 
@@ -52,4 +40,4 @@ def _parser(file_name):
 
 
 if __name__ == '__main__':
-    print failed_tests('session_history.csv')
+    print test_counter('session_history.csv', False)
