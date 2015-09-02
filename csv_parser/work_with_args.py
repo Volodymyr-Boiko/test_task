@@ -24,12 +24,17 @@ import argparse
 
 # def arg_parser():
 #     parser = argparse.ArgumentParser()
+def ff():
+    return 5
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-v")
 parser.add_argument('-b')
+parser.add_argument('q')
 args = parser.parse_args()
 if args.v:
     print args.v
 elif args.b:
     print int(args.b) + 4
+elif args.q:
+    print ff()
