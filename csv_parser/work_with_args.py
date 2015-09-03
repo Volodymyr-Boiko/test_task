@@ -5,11 +5,16 @@ import argparse
 from csv_parser import test_counter
 
 
-def arg_parser():
+def all_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-v')
     parser.add_argument('-b')
     args = parser.parse_args()
+    return args
+
+
+def main():
+    args = all_args()
     if args.v:
         return test_counter(args.v)
     elif args.b:
@@ -17,4 +22,4 @@ def arg_parser():
 
 
 if __name__ == '__main__':
-    print arg_parser()
+    print main()
